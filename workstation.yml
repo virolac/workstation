@@ -1,0 +1,4 @@
+# workstation.yml
+---
+- name: Set up a local development workstation
+  hosts: local
