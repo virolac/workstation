@@ -1,0 +1,6 @@
+# logo-ls_Ubuntu.yml
+---
+- name: Install logo-ls (Ubuntu)
+  ansible.builtin.apt:
+    deb: https://github.com/Yash-Handa/logo-ls/releases/download/v1.3.7/logo-ls_amd64.deb
+  become: yes

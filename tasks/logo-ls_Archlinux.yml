@@ -1,0 +1,7 @@
+# logo-ls_Archlinux.yml
+---
+- name: Install logo-ls
+  yay:
+    name: logo-ls
+    state: present
+  become: yes

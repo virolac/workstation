@@ -1,0 +1,82 @@
+# cli-tools.yml
+---
+- name: Install tmux
+  ansible.builtin.package:
+    name: tmux
+    state: present
+  become: yes
+  tags:
+    - tmux
+    - shell
+    - cli-tools
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: tmux
+  tags:
+    - tmux
+    - shell
+    - cli-tools
+
+- name: Install tmux-sessionizer
+  ansible.builtin.shell:
+    cmd: stow -vt {{ ansible_env.HOME }} scripts
+    chdir: "{{ ansible_env.HOME }}/.repos/dotfiles"
+  tags:
+    - tmux-sessionizer
+    - tmux
+    - shell
+    - cli-tools
+
+- name: Install fzf
+  ansible.builtin.package:
+    name: fzf
+    state: present
+  become: yes
+  tags:
+    - fzf
+    - shell
+    - cli-tools
+
+- name: Install pip
+  ansible.builtin.package:
+    name: "{{ pip }}"
+    state: present
+  become: yes
+  tags:
+    - pip
+    - python
+    - shell
+    - cli-tools
+
+- name: Install bat
+  ansible.builtin.shell: cargo install bat
+  tags:
+    - bat
+    - rust
+    - shell
+    - cli-tools
+
+- name: Install fd-find
+  ansible.builtin.shell: cargo install fd-find
+  tags:
+    - fd-find
+    - rust
+    - shell
+    - cli-tools
+
+- name: Install ripgrep
+  ansible.builtin.shell: cargo install ripgrep
+  tags:
+    - ripgrep
+    - rust
+    - shell
+    - cli-tools
+
+- name: Include logo-ls distro-specific task
+  ansible.builtin.include_tasks: logo-ls_{{ ansible_distribution }}.yml
+  tags:
+    - logo-ls
+    - golang
+    - shell
+    - cli-tools
