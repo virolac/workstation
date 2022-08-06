@@ -1,0 +1,33 @@
+# languages.yml
+---
+- name: Download rustup installer
+  ansible.builtin.get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+  tags:
+    - rust
+    - languages
+- name: Install Rust
+  ansible.builtin.shell: cat /tmp/sh.rustup.rs | sh -s -- -y
+  tags:
+    - rust
+    - languages
+
+- name: Install Golang
+  ansible.builtin.package:
+    name: "{{ golang }}"
+    state: present
+  become: yes
+  tags:
+    - golang
+    - languages
+
+- name: Install Node.js
+  ansible.builtin.package:
+    name: nodejs
+    state: present
+  become: yes
+  tags:
+    - nodejs
+    - javascript
+    - languages
