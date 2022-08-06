@@ -1,0 +1,21 @@
+# Archlinux.yml
+---
+clangd: clang
+
+golang:
+  - go
+  - go-tools
+
+ninja: ninja
+
+nvim_prereqs:
+  - base-devel
+  - cmake
+  - unzip
+  - ninja
+  - tree-sitter
+  - curl
+
+pip: python-pip
+
+xscreensaver: xscreensaver

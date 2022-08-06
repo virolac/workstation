@@ -1,0 +1,6 @@
+# stow.yml
+---
+- name: Add {{ package }} configuration
+  ansible.builtin.shell:
+    cmd: stow --target {{ ansible_env.HOME}} --verbose=2 {{ package }}
+    chdir: "{{ ansible_env.HOME }}/.repos/dotfiles"

@@ -2,3 +2,9 @@
 ---
 - name: Set up a local development workstation
   hosts: local
+  pre_tasks:
+    - name: Include variables
+      include_vars: "{{ ansible_distribution }}.yml"
+      tags: always
+  tasks:
+    - ansible.builtin.import_tasks: tasks/wm.yml

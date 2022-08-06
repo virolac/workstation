@@ -1,0 +1,30 @@
+# Ubuntu.yml
+---
+clangd: clangd-14
+
+golang:
+  - golang-go
+  - golang-golang-x-tools
+
+ninja: ninja-build
+
+nvim_prereqs:
+  - ninja-build
+  - gettext
+  - libtool
+  - libtool-bin
+  - autoconf
+  - automake
+  - cmake
+  - g++
+  - pkg-config
+  - unzip
+  - curl
+  - doxygen
+
+pip: python3-pip
+
+xscreensaver:
+  - xscreensaver
+  - xscreensaver-data-extra
+  - xscreensaver-gl-extra

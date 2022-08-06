@@ -1,0 +1,132 @@
+# wm.yml
+---
+- name: Install bspwm
+  ansible.builtin.package:
+    name: bspwm
+    state: present
+  become: yes
+  tags:
+    - bspwm
+    - wm
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: bspwm
+  tags:
+    - bspwm
+    - wm
+
+- name: Install sxhkd
+  ansible.builtin.package:
+    name: sxhkd
+    state: present
+  become: yes
+  tags:
+    - sxhkd
+    - wm
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: sxhkd
+  tags:
+    - sxhkd
+    - wm
+
+- name: Install polybar
+  ansible.builtin.package:
+    name: polybar
+    state: present
+  become: yes
+  tags:
+    - polybar
+    - wm
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: polybar
+  tags:
+    - polybar
+    - wm
+
+- name: Install dunst
+  ansible.builtin.package:
+    name: dunst
+    state: present
+  become: yes
+  tags:
+    - dunst
+    - wm
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: dunst
+  tags:
+    - dunst
+    - wm
+
+- name: Install picom
+  ansible.builtin.package:
+    name: picom
+    state: present
+  become: yes
+  tags:
+    - picom
+    - wm
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: picom
+  tags:
+    - picom
+    - wm
+
+- name: Install kitty
+  ansible.builtin.package:
+    name: kitty
+    state: present
+  become: yes
+  tags:
+    - kitty
+    - wm
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: kitty
+  tags:
+    - kitty
+    - wm
+
+- name: Install pywal
+  ansible.builtin.pip:
+    name: pywal
+    extra_args: --user
+  tags:
+    - pywal
+    - wm
+
+- name: Install numlockx
+  ansible.builtin.package:
+    name: numlockx
+    state: present
+  become: yes
+  tags:
+    - numlockx
+    - wm
+
+- name: Install xscreensaver
+  ansible.builtin.package:
+    name: "{{ xscreensaver }}"
+    state: present
+  become: yes
+  tags:
+    - xscreensaver
+    - wm
+
+- name: Install fcitx5
+  ansible.builtin.package:
+    name: [ fcitx5, fcitx5-mozc ]
+    state: present
+  become: yes
+  tags:
+    - fcitx5
+    - wm
