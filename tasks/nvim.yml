@@ -1,0 +1,52 @@
+# nvim.yml
+---
+- name: Install neovim build prerequisites
+  ansible.builtin.package:
+    name: "{{ nvim_prereqs }}"
+    state: present
+  become: yes
+  tags:
+    - shell
+    - nvim
+
+- name: Download neovim
+  ansible.builtin.git:
+    repo: https://github.com/neovim/neovim
+    dest: "{{ ansible_env.HOME }}/.repos/neovim"
+  tags:
+    - shell
+    - nvim
+
+- name: Build neovim
+  ansible.builtin.shell:
+    cmd: make CMAKE_BUILD_TYPE=RelWithDebInfo
+    chdir: "{{ ansible_env.HOME }}/.repos/neovim"
+  tags:
+    - shell
+    - nvim
+
+- name: Install neovim
+  ansible.builtin.shell:
+    cmd: make install
+    chdir: "{{ ansible_env.HOME }}/.repos/neovim"
+  become: yes
+  tags:
+    - shell
+    - nvim
+
+- ansible.builtin.import_tasks: stow.yml
+  vars:
+    package: nvim
+  tags:
+    - shell
+    - nvim
+
+- name: Install packer
+  ansible.builtin.git:
+    repo: https://github.com/wbthomason/packer.nvim
+    dest: "{{ ansible_env.HOME }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    depth: 1
+  tags:
+    - packer
+    - shell
+    - nvim
