@@ -8,3 +8,4 @@
       tags: always
   tasks:
     - ansible.builtin.import_tasks: tasks/wm.yml
+    - ansible.builtin.import_tasks: tasks/zsh.yml
