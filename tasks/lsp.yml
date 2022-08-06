@@ -1,0 +1,60 @@
+# lsp.yml
+---
+- name: Install clangd
+  ansible.builtin.package:
+    name: "{{ clangd }}"
+    state: present
+  become: yes
+  tags:
+    - clangd
+    - c
+    - cpp
+    - languages
+    - lsp
+
+- name: Download rust-analyzer
+  ansible.builtin.git:
+    repo: https://github.com/rust-lang/rust-analyzer
+    dest: /tmp/rust-analyzer
+  tags:
+    - rust-analyzer
+    - rust
+    - languages
+    - lsp
+- name: Install rust-analyzer
+  ansible.builtin.shell:
+    cmd: cargo xtask install --server
+    chdir: /tmp/rust-analyzer
+  tags:
+    - rust-analyzer
+    - rust
+    - languages
+    - lsp
+
+- name: Install gopls
+  ansible.builtin.package:
+    name: gopls
+    state: present
+  become: yes
+  tags:
+    - gopls
+    - golang
+    - languages
+    - lsp
+
+- name: Install pyright
+  ansible.builtin.shell: npm install --global pyright
+  become: yes
+  tags:
+    - pyright
+    - python
+    - languages
+    - lsp
+
+- name: Install lua-language-server
+  ansible.builtin.include_tasks: sumneko.yml
+  tags:
+    - sumneko
+    - lua
+    - languages
+    - lsp

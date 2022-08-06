@@ -1,0 +1,26 @@
+# sumneko.yml
+---
+- name: Download sumneko
+  ansible.builtin.git:
+    repo: https://github.com/sumneko/lua-language-server
+    recursive: yes
+    dest: /opt/lua-language-server
+  become: yes
+
+- name: Install sumneko dependencies
+  ansible.builtin.package:
+    name: "{{ ninja }}"
+    state: present
+  become: yes
+
+- name: Build luamake
+  ansible.builtin.shell:
+    cmd: ./compile/install.sh
+    chdir: /opt/lua-language-server/3rd/luamake
+  become: yes
+
+- name: Build sumneko
+  ansible.builtin.shell:
+    cmd: ./3rd/luamake/luamake rebuild
+    chdir: /opt/lua-language-server
+  become: yes
