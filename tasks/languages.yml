@@ -24,7 +24,7 @@
 
 - name: Install Node.js
   ansible.builtin.package:
-    name: nodejs
+    name: [ nodejs, npm ]
     state: present
   become: yes
   tags:
